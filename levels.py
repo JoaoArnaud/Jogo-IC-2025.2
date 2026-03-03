@@ -10,12 +10,12 @@ NODES: List[Node] = [
         "id": 0,
         "pos": (130, 300),
         "quiz": {
-            "question": "O que é uma rede neural artificial?",
+            "question": "Quem idealizou o primeiro modelo matemático de neurônio artificial em 1943?",
             "options": [
-                "Um banco de dados inteligente",
-                "Um modelo computacional inspirado no cerebro humano",
-                "Um tipo de linguagem de programacao",
-                "Um algoritmo de ordenacao"
+                "Marvin Minsky e Seymour Papert",
+                "Warren McCulloch e Walter Pitts",
+                "Geoffrey Hinton e Yann LeCun",
+                "Alan Turing e John Von Neumann"
             ],
             "correct_index": 1,
         },
@@ -24,28 +24,28 @@ NODES: List[Node] = [
         "id": 1,
         "pos": (280, 330),
         "quiz": {
-            "question": "Qual e a unidade basica de uma rede neural?",
+            "question": "No contexto de redes neurais, o que significa dizer que um modelo “aprendeu”?",
             "options": [
-                "Camada",
-                "Gradiente",
-                "Neuronio artificial",
-                "Tensor"
+                "Ele memorizou todos os dados",
+                "Ele encontrou os pesos ideais para resolver uma função",
+                "Ele copiou o cérebro humano perfeitamente",
+                "Ele entende o conteúdo como um humano"
             ],
-            "correct_index": 2,
+            "correct_index": 1,
         },
     },
     {
         "id": 2,
         "pos": (420, 400),
         "quiz": {
-            "question": "O que um neuronio artificial faz?",
+            "question": "O que contribuiu para o chamado “Inverno da IA”?",
             "options": [
-                "Armazena dados permanentemente",
-                "Soma entradas ponderadas e aplica uma funcao de ativacao",
-                "Ordena numeros",
-                "Executa loops"
+                "Falta de interesse dos cientistas",
+                "Falta de dados",
+                "Limitações de hardware e críticas ao Perceptron",
+                "Proibição do uso de IA"
             ],
-            "correct_index": 1,
+            "correct_index": 2,
         },
     },
     {
