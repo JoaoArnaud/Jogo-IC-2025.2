@@ -135,10 +135,13 @@ class QuizScene(SceneBase):
         )
 
         question_top = card_rect.y + 48
-        minimum_options_area = 250
+        # Perguntas longas ganham um pouco mais de area antes de reduzir muito a fonte.
+        question_length = len(self.question)
+        extra_question_space = min(56, max(0, (question_length - 90) // 2))
+        minimum_options_area = max(212, 250 - extra_question_space)
         available_for_question = max(
             82,
-            min(160, status_rect.top - question_top - minimum_options_area),
+            min(210, status_rect.top - question_top - minimum_options_area),
         )
         question_lines, question_font = self._fit_question_lines(
             max_width=content_width - 36,
@@ -219,7 +222,7 @@ class QuizScene(SceneBase):
         self._draw_feedback_and_hint(screen, status_rect)
 
     def _fit_question_lines(self, max_width: int, max_height: int):
-        for font in (self.game.font_medium, self.game.font_ui):
+        for font in (self.game.font_medium, self.game.font_small, self.game.font_ui):
             line_height = font.get_height() + 4
             max_lines = max(1, max_height // max(1, line_height))
             wrapped = wrap_text(font, self.question, max_width)
