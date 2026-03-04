@@ -64,7 +64,7 @@ NODES: List[Node] = [
     },
     {
         "id": 4,
-        "pos": (600, 390),
+        "pos": (600, 290),
         "quiz": {
             "question": "O que e funcao de ativacao?",
             "options": [

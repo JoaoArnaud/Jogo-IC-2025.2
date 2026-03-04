@@ -29,7 +29,7 @@ def with_alpha(color: Color, alpha: int) -> ColorA:
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 700
 FPS = 60
-WINDOW_TITLE = "DeepMind Quiz"
+WINDOW_TITLE = "Neural Quest"
 
 # Paleta obrigatoria
 PRIMARY_HEX = "#522a8e"

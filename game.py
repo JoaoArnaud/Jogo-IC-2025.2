@@ -13,6 +13,7 @@ from rendering import (
     draw_text_centralizado,
 )
 from scenes.overworld import OverworldScene
+from scenes.start import StartScene
 from settings import (
     BACKGROUND_BOTTOM,
     BACKGROUND_TOP,
@@ -76,6 +77,10 @@ class Game:
         self.overworld_scene = OverworldScene(self)
         self.current_scene = self.overworld_scene
         self.current_scene.on_enter(None)
+        self.menu_scene = StartScene(self)
+
+        # State machine global
+        self.state = "menu"  # menu | game
 
         # Transicao global entre cenas
         self.transition_state = "none"  # none | fade_out | fade_in
@@ -103,6 +108,12 @@ class Game:
         self.transition_state = "fade_out"
         self.transition_alpha = 0.0
 
+    def enter_game_state(self) -> None:
+        if self.state == "game":
+            return
+        self.state = "game"
+        self.pause_menu_active = False
+
     def _load_selector_sprite(self) -> pygame.Surface:
         asset_path = Path(__file__).resolve().parent / "assets" / "aluno_cdia.png"
         try:
@@ -115,6 +126,8 @@ class Game:
             return create_player_sprite(PRIMARY, PINK_ACC, WHITE, DARK)
 
     def _handle_global_event(self, event) -> bool:
+        if self.state != "game":
+            return False
         if event.type != pygame.KEYDOWN or self.transition_state != "none":
             return False
 
@@ -247,23 +260,30 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.running = False
                     continue
+                if self.state == "menu":
+                    self.menu_scene.handle_event(event)
+                    continue
                 if self._handle_global_event(event):
                     continue
                 if self.transition_state == "none" and not self.pause_menu_active:
                     self.current_scene.handle_event(event)
 
-            if not self.pause_menu_active:
-                self.current_scene.update(dt)
-            self._update_transition(dt)
-            self.current_scene.draw(self.screen)
+            if self.state == "menu":
+                self.menu_scene.update(dt)
+                self.menu_scene.draw(self.screen)
+            else:
+                if not self.pause_menu_active:
+                    self.current_scene.update(dt)
+                self._update_transition(dt)
+                self.current_scene.draw(self.screen)
 
-            if self.transition_state != "none":
-                alpha = int(max(0.0, min(255.0, self.transition_alpha)))
-                self.fade_surface.fill(with_alpha(DARK, alpha))
-                self.screen.blit(self.fade_surface, (0, 0))
+                if self.transition_state != "none":
+                    alpha = int(max(0.0, min(255.0, self.transition_alpha)))
+                    self.fade_surface.fill(with_alpha(DARK, alpha))
+                    self.screen.blit(self.fade_surface, (0, 0))
 
-            if self.pause_menu_active:
-                self._draw_pause_menu()
+                if self.pause_menu_active:
+                    self._draw_pause_menu()
 
             pygame.display.flip()
 
