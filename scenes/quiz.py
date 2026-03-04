@@ -36,6 +36,7 @@ class QuizScene(SceneBase):
         self.question = node_data["quiz"]["question"]
         self.options = node_data["quiz"]["options"]
         self.correct_index = node_data["quiz"]["correct_index"]
+        self.level_title = "NeuroDesafio"
 
         self.selected_index = 0
         self.answered = False
@@ -120,6 +121,15 @@ class QuizScene(SceneBase):
         content_right = card_rect.right - 32
         content_width = content_right - content_left
         accent_rect = pygame.Rect(content_left, card_rect.y + 20, content_width, 8)
+
+        draw_text_centralizado(
+            screen,
+            self.game.font_ui,
+            self.level_title,
+            blend_color(PRIMARY, DARK, 0.28),
+            (card_rect.centerx, card_rect.y + 35),
+        )
+
         pygame.draw.rect(
             screen,
             with_alpha(blend_color(SELECTION_COLOR, WHITE, 0.32), 255),
