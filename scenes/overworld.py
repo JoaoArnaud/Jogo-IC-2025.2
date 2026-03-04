@@ -319,7 +319,7 @@ class OverworldScene(SceneBase):
             shadow_offset=(6, 6),
         )
 
-        progress_text = f"QUIZZES: {len(self.game.completed_nodes)}/{len(self.game.node_ids)}"
+        progress_text = f"NEURODESAFIOS: {len(self.game.completed_nodes)}/{len(self.game.node_ids)}"
         controls_text = "SETAS MOVER | ENTER QUIZ | ESC MENU"
 
         screen.blit(
@@ -415,7 +415,7 @@ class OverworldScene(SceneBase):
         draw_text_centralizado(
             screen,
             self.game.font_small,
-            "VOCE CONCLUIU TODOS OS QUIZZES",
+            "VOCE CONCLUIU TODOS OS NEURODESAFIOS",
             TEXT_COLOR,
             (panel_rect.centerx, panel_rect.y + 178),
         )
